@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 15.0f;
-
+    //Rate of foward/backword movement
+    private float speed = 15.0f;
+    private float turnspeed = 15.0f;
+    private float horizontalInput;
+    private float verticalInput;
     void Start()
     {
         
@@ -14,6 +17,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        verticalInput = Input.GetAxis("Vertical");
+
+        Debug.Log(Time.deltaTime);
+
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
+
+        transform.Rotate(Vector3.up, Time.deltaTime * turnspeed * horizontalInput);
     }
 }
